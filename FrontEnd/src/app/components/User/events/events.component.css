@@ -1,0 +1,114 @@
+.events-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.events {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.event-card {
+  background-color: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  width: 320px;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.event-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+.event-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.event-details {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.event-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.event-meta {
+  font-size: 14px;
+  color: #555;
+}
+
+.event-meta i {
+  margin-right: 6px;
+  color: #555;
+}
+
+.event-price {
+  font-size: 16px;
+  margin-top: 8px;
+  color: #555;
+}
+
+.highlight-price {
+  color: #007bff;
+  font-weight: bold;
+}
+
+.buy-button {
+  margin-top: 10px;
+  background-color: #007bff;
+  color: #fff;
+  text-align: center;
+  padding: 10px;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background 0.3s, transform 0.2s ease;
+}
+
+.buy-button:hover {
+  background-color: #0056b3;
+}
+
+.buy-button:active {
+  background-color: #004a99;
+  transform: scale(0.97);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .event-card {
+    width: 100%;
+    max-width: 90vw;
+  }
+
+  .events-container {
+    padding: 10px;
+  }
+
+  .event-title {
+    font-size: 16px;
+  }
+
+  .event-price {
+    font-size: 15px;
+  }
+
+  .buy-button {
+    font-size: 14px;
+    padding: 8px;
+  }
+}

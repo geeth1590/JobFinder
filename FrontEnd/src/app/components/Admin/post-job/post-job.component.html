@@ -1,0 +1,86 @@
+<!-- <app-side-bar></app-side-bar>
+
+<div class="main-content">
+
+  <div class="form-container">
+    <div
+      class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+      <h1 class="h2">Create Event</h1>
+    </div>
+
+    <form id="eventForm">
+      <label for="title">Title</label>
+      <input type="text" id="title" name="title" required />
+
+      <label for="date">Date</label>
+      <input type="date" id="date" name="date" required />
+
+      <label for="time">Time</label>
+      <input type="time" id="time" name="time" required />
+
+      <label for="location">Location</label>
+      <input type="text" id="location" name="location" required />
+
+      <label for="price">Price (Rs)</label>
+      <input type="number" id="price" name="price" required />
+
+      <label for="image_url">Image URL</label>
+      <input type="url" id="image_url" name="image_url" required oninput="updateImagePreview()" />
+
+      <button type="submit">Submit</button>
+    </form>
+
+    <div class="image-preview" id="previewContainer" style="display: none;">
+      <p><strong>Image Preview:</strong></p>
+      <img id="previewImage" src="" alt="Image Preview" />
+    </div>
+  </div>
+
+  <script>
+    function updateImagePreview() {
+      const url = document.getElementById('image_url').value;
+      const previewImage = document.getElementById('previewImage');
+      const container = document.getElementById('previewContainer');
+
+      if (url && url.startsWith('http')) {
+        previewImage.src = url;
+        container.style.display = 'block';
+      } else {
+        container.style.display = 'none';
+      }
+    }
+  </script>
+</div> -->
+
+<app-side-bar></app-side-bar>
+<div class="main-content">
+
+  <div class="form-container">
+<form (ngSubmit)="submitEvent()" #eventForm="ngForm">
+  <label>Title</label>
+  <input type="text" name="title" [(ngModel)]="title" required>
+
+  <label>Date</label>
+  <input type="date" name="date" [(ngModel)]="date" required>
+
+  <label>Time</label>
+  <input type="time" name="time" [(ngModel)]="time" required>
+
+  <label>Location</label>
+  <input type="text" name="location" [(ngModel)]="location" required>
+
+  <label>Price (Rs)</label>
+  <input type="number" name="price" [(ngModel)]="price" required>
+
+  <label>Image URL</label>
+  <input type="url" name="imageUrl" [(ngModel)]="imageUrl" required>
+
+  <div *ngIf="imageUrl">
+    <p><strong>Preview:</strong></p>
+    <img [src]="imageUrl" alt="Image Preview" width="200">
+  </div>
+
+  <button type="submit">Submit</button>
+</form>
+</div>
+</div>

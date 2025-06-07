@@ -1,0 +1,32 @@
+<div class="dashboard-layout">
+
+  <app-side-bar></app-side-bar>
+  <div class="main-content">
+    <main role="main">
+      <div
+        class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">User Table</h1>
+      </div>
+
+      <table class="table table-bordered table-striped">
+        <thead class="table-dark">
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th>User Name</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of users">
+            <td>{{ user.id }}</td>
+            <td>{{ user.name }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.role }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </main>
+  </div>
+</div>

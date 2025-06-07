@@ -1,0 +1,20 @@
+<nav class="navbar">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <div class="logo">JobFinder.lk</div>
+  <ul class="nav-links" [class.active]="isMenuOpen">
+    <li><a routerLink="/dashboard">Home</a></li>
+    <li><a routerLink="/about">About</a></li>
+    <li><a routerLink="/contact">Contact</a></li>
+
+    <button class="logout-btn" (click)="login()" *ngIf="!showLoginBtn">
+      <span>login</span>
+    </button>
+    <button class="logout-btn" (click)="sinup()" *ngIf="!showLoginBtn">
+      <span>Sinup</span>
+    </button>
+    <button class="logout-btn" (click)="logout()" *ngIf="showLoginBtn">
+      <span>logout</span>
+    </button>
+  </ul>
+  <button class="menu-toggle" (click)="toggleMenu()">&#9776;</button>
+</nav>

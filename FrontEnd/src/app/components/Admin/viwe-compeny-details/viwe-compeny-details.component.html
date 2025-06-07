@@ -1,0 +1,75 @@
+<app-side-bar></app-side-bar>
+<div class="main-content">
+  <div class="form-container">
+    <table class="table table-bordered table-striped">
+      <thead class="table-dark">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Email</th>
+          <th scope="col">Username</th>
+          <th scope="col">Address</th>
+          <th scope="col">Company Name</th>
+          <th scope="col">Phone Number</th>
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <!-- Edit Form Row - Shows when a company is selected for editing -->
+        <tr *ngIf="selectedCompeny" class="table-warning">
+          <td colspan="7">
+            <div class="edit-form-container p-3">
+              <h5>Edit Company</h5>
+              <form (ngSubmit)="updateCompeny()" #compenyForm="ngForm" class="edit-event-form">
+                
+                <div class="form-row mb-2">
+                  <input type="text" [(ngModel)]="selectedCompeny.username" [name]="'username' + selectedCompeny.id"
+                    placeholder="Username" required class="form-control me-2" />
+                  <input type="email" [(ngModel)]="selectedCompeny.email" [name]="'email' + selectedCompeny.id"
+                    placeholder="Email" required class="form-control" />
+                </div>
+
+                <div class="form-row mb-2">
+                  <input type="text" [(ngModel)]="selectedCompeny.adress" [name]="'adress' + selectedCompeny.id"
+                    placeholder="Address" required class="form-control me-2" />
+                  <input type="text" [(ngModel)]="selectedCompeny.compenyName"
+                    [name]="'compenyName' + selectedCompeny.id" placeholder="Company Name" required
+                    class="form-control" />
+                </div>
+
+                <div class="form-row mb-2">
+                  <input type="tel" [(ngModel)]="selectedCompeny.phoneNumber"
+                    [name]="'phoneNumber' + selectedCompeny.id" placeholder="Phone Number" required
+                    class="form-control" />
+                </div>
+
+                <div class="form-actions">
+                  <button type="submit" class="btn btn-success btn-sm me-2">Save</button>
+                  <button type="button" class="btn btn-secondary btn-sm"
+                    (click)="selectedCompeny = null">Cancel</button>
+                </div>
+
+              </form>
+            </div>
+          </td>
+        </tr>
+
+        <!-- Data Rows -->
+        <tr *ngFor="let compeny of compenyList; let i = index" [class.table-active]="selectedCompeny?.id === compeny.id">
+          <td>{{ i + 1 }}</td>
+          <td>{{ compeny.email }}</td>
+          <td>{{ compeny.username }}</td>
+          <td>{{ compeny.adress }}</td>
+          <td>{{ compeny.compenyName }}</td>
+          <td>{{ compeny.phoneNumber }}</td>
+          <td>
+            <button (click)="editCompeny(compeny)" class="btn btn-primary btn-sm">
+              Update
+            </button>
+            <button (click)="deleteCompeny(compeny.id)" class="btn btn-danger btn-sm">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

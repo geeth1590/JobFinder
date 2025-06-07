@@ -1,0 +1,248 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    font-family: 'Poppins', sans-serif;
+}
+
+a {
+    text-decoration: none;
+}
+
+li {
+    list-style: none;
+}
+
+h1, h2 {
+    color: #444;
+}
+
+.btn {
+    background: #01145f;
+    color: white;
+    padding: 5px 10px;
+    text-align: center;
+    border: none;
+    cursor: pointer;
+}
+
+.btn:hover {
+    color: #f05462;
+    background: white;
+    padding: 3px 8px;
+    border: 2px solid #f05462;
+}
+
+.side-menu {
+    background: #01145f ;
+    width: 280px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+
+.side-bar a{
+        color: rgb(254, 241, 241);
+}
+.side-bar a:hover {
+     background: rgb(11, 47, 165);
+    color: #f05462;
+}
+
+.side-menu .brand-name {
+    height: 10vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.side-menu li {
+    font-size: 24px;
+    padding: 10px 40px;
+    color: white;
+    display: flex;
+    align-items: center;
+}
+
+.side-menu li:hover {
+    background: rgb(11, 47, 165);
+    color: #f05462;
+}
+
+/* Container Layout */
+.container {
+    position: absolute;
+    left: 290px;
+    right: 0;
+    width: calc(100% - 290px);
+    height: 100vh;
+    background: #f1f1f1;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+/* Header */
+.container .header {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: calc(100% - 290px);
+    height: 10vh;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    transition: all 0.3s ease;
+}
+
+.container .header .nav {
+    width: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.container .header .nav .search {
+    flex: 3;
+    display: flex;
+    justify-content: center;
+}
+
+.container .header .nav .search input[type="text"] {
+    border: none;
+    background: #f1f1f1;
+    padding: 10px;
+    width: 50%;
+    border-radius: 4px;
+}
+
+.container .header .nav .search button {
+    width: 40px;
+    height: 40px;
+    border: none;
+    background: #01145f;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 5px;
+    border-radius: 4px;
+}
+
+.container .header .nav .user {
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.container .header .nav .user img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.container .header .nav .user .img-case {
+    position: relative;
+    width: 50px;
+    height: 50px;
+}
+
+.container .header .nav .user .img-case img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* Media Queries for Responsiveness */
+
+/* Medium Screens */
+@media screen and (max-width: 1050px) {
+    .side-menu li {
+        font-size: 18px;
+    }
+    .container .header .nav .search input[type="text"] {
+        width: 70%;
+    }
+}
+
+/* Small Screens */
+@media screen and (max-width: 940px) {
+    .side-menu {
+        width: 80px;
+        align-items: center;
+    }
+
+    .side-menu li span {
+        display: none;
+    }
+
+    .container {
+        left: 80px;
+        width: calc(100% - 80px);
+    }
+
+    .container .header {
+        width: calc(100% - 80px);
+    }
+}
+
+/* Mobile Screens */
+@media screen and (max-width: 768px) {
+    .container {
+        left: 0;
+        width: 100%;
+        padding-top: 10vh;
+    }
+
+    .container .header {
+        width: 100%;
+        left: 0;
+    }
+
+    .container .header .nav {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .container .header .nav .search input[type="text"] {
+        width: 100%;
+    }
+
+    .container .header .nav .user {
+        width: 100%;
+        justify-content: space-between;
+    }
+}
+
+/* Extra Small Screens */
+@media screen and (max-width: 480px) {
+    .side-menu {
+        display: none;
+    }
+
+    .container {
+        left: 0;
+        width: 100%;
+    }
+
+    .container .header {
+        width: 100%;
+    }
+
+    .brand-name h1 {
+        font-size: 16px;
+    }
+}

@@ -1,0 +1,44 @@
+<app-navbar></app-navbar>
+<div class="dashboard-container">
+  <div *ngIf="event">
+  <div class="container my-5">
+  <div class="row">
+    <!-- Main Content -->
+    <div class="col-md-8">
+      <h2>{{ event.title }}</h2>
+      <p>
+        <strong>{{ event.date }}</strong> - {{ event.time }} <br />
+        {{ event.location }} &nbsp; • &nbsp; {{ event.organizer }}
+      </p>
+
+      <hr />
+      <h5>More info</h5>
+      <p>{{ event.description }}</p>
+
+      <hr />
+      <h6>Ticket Policy</h6>
+      <ul>
+        <li *ngFor="let policy of event.policies">{{ policy }}</li>
+      </ul>
+    </div>
+
+    <!-- Ticket Card -->
+    <div class="col-md-4">
+      <div class="card shadow">
+        <!-- <img [src]="event.imageUrl" class="card-img-top" alt="Event Poster" /> -->
+         <img class="event-image" [src]="event.imageUrl" alt="{{ event.title }}">
+        <div class="card-body">
+          <h5 class="card-title">{{event.title}}</h5>
+          <ul class="list-group mb-3">
+            <li class="list-group-item d-flex justify-content-between" *ngFor="let ticket of event.ticketOptions">
+              {{ ticket.label }} <strong>{{ ticket.price }}</strong>
+            </li> 
+          </ul>
+          <button class="btn btn-primary w-100" (click)="requestJObs()">Request</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<app-footer></app-footer>

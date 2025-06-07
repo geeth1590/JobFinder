@@ -1,0 +1,69 @@
+/* General page background */
+.dashboard-container {
+  background-color: #0b1437; /* Deep navy blue */
+  color: #ffffff;            /* White text */
+  min-height: 100vh;
+  padding: 2rem 0;
+}
+
+/* Container and Card Styling */
+.container {
+  background-color: #ffffff;  /* White card content */
+  color: #000000;             /* Reset text to black inside container */
+  border-radius: 8px;
+  padding: 2rem;
+}
+
+/* Event image */
+.event-image {
+  width: 100%;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  max-height: 250px;
+  object-fit: cover;
+}
+
+/* Ticket card */
+.card {
+  background-color: #f8f9fa; /* Light gray */
+  border: none;
+  border-radius: 8px;
+}
+
+/* Ticket Prices */
+.card-title {
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+/* Ticket Price List */
+.list-group-item {
+  background-color: #ffffff;
+  border: none;
+  color: #000000;
+  font-weight: 500;
+}
+
+/* Buy button */
+.btn-primary {
+  background-color: #0046ff;
+  border-color: #0046ff;
+}
+
+.btn-primary:hover {
+  background-color: #002db3;
+  border-color: #002db3;
+}
+
+h2 {
+  font-weight: bold;
+}
+
+.card-img-top {
+  height: auto;
+  object-fit: cover;
+}
+
+ul {
+  padding-left: 1.2rem;
+}

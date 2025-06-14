@@ -1,0 +1,84 @@
+<app-side-bar></app-side-bar>
+<div class="main-content">
+
+  <div class="form-container">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">date</th>
+          <th scope="col">image_url</th>
+          <th scope="col">Location</th>
+          <th scope="col">price</th>
+          <th scope="col">time</th>
+          <th scope="col">title</th>
+          <th scope="col">UpLodedBy</th>
+          <th scope="col">description</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let event of eventList; let i = index">
+          <ng-container *ngIf="selectedEvent?.id !== event.id; else editRow">
+            <td>{{ i + 1 }}</td>
+            <td>{{ event.date }}</td>
+            <td><img [src]="event.imageUrl" alt="event" width="100" /></td>
+
+
+            <td>{{ event.location }}</td>
+            <td>{{ event.price }}</td>
+            <td>{{ event.time }}</td>
+            <td>{{ event.title }}</td>
+            <td>{{ event.uplodetBy }}</td>
+            <td>{{ event.description }}</td>
+            <td>
+              <button (click)="editEvent(event)" class="btn btn-primary btn-sm">Update</button>
+              <button (click)="deleteEvent(event.id)" class="btn btn-danger">Delete</button>
+            </td>
+
+          </ng-container>
+
+          <ng-template #editRow>
+            <td colspan="9">
+              <form (ngSubmit)="updateEvent()" #eventForm="ngForm" class="edit-event-form">
+
+                <div class="form-row">
+                  <input type="text" [(ngModel)]="selectedEvent.date" [name]="'date' + selectedEvent.id"
+                    placeholder="Date" required class="form-control" />
+                  <input type="text" [(ngModel)]="selectedEvent.imageUrl" [name]="'imageUrl' + selectedEvent.id"
+                    placeholder="Image URL" class="form-control" />
+                </div>
+
+                <div class="form-row">
+                  <input type="text" [(ngModel)]="selectedEvent.location" [name]="'location' + selectedEvent.id"
+                    placeholder="Location" required class="form-control" />
+                  <input type="number" [(ngModel)]="selectedEvent.price" [name]="'price' + selectedEvent.id"
+                    placeholder="Price" required class="form-control" />
+                </div>
+
+                <div class="form-row">
+                  <input type="text" [(ngModel)]="selectedEvent.time" [name]="'time' + selectedEvent.id"
+                    placeholder="Time" required class="form-control" />
+                  <input type="text" [(ngModel)]="selectedEvent.title" [name]="'title' + selectedEvent.id"
+                    placeholder="Title" required class="form-control" />
+                </div>
+
+                <div class="form-row">
+                  <textarea [(ngModel)]="selectedEvent.description" [name]="'description' + selectedEvent.id"
+                    placeholder="Description" class="form-control description-textarea"></textarea>
+                </div>
+
+                <div class="form-actions">
+                  <button type="submit" class="btn btn-success btn-sm me-2">Save</button>
+                  <button type="button" class="btn btn-secondary btn-sm" (click)="selectedEvent = null">Cancel</button>
+                </div>
+
+              </form>
+            </td>
+          </ng-template>
+        </tr>
+      </tbody>
+
+    </table>
+  </div>
+</div>

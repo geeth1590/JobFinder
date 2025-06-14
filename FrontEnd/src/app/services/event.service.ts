@@ -22,11 +22,18 @@ export class EventService {
 
  
   createEvent (user: any) {
+    console.log("user id ", user.uplodetBy)
+    console.log("Creating event:", user);
       return lastValueFrom(this.http.post(`${this.API_URL}/saveEvent`, user));
     }
   
    getEvents(): Observable<any> {
     return this.http.get<any>(`${this.API_URL}/getEvent`);
+    }
+
+    // getPending event for admin
+    getEventsAdmin(): Observable<any> {
+    return this.http.get<any>(`${this.API_URL}/admin/pending`);
     }
 
     getById(id: number): Observable<any> {

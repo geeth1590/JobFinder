@@ -36,6 +36,12 @@
         </dependency>
 
         <dependency>
+            <groupId>org.crac</groupId>
+            <artifactId>crac</artifactId>
+            <version>1.3.0</version> <!-- or latest available -->
+        </dependency>
+
+        <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
         </dependency>

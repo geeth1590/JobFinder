@@ -5,10 +5,20 @@
     <li><a routerLink="/dashboard">Home</a></li>
     <li><a routerLink="/about">About</a></li>
     <li><a routerLink="/contact">Contact</a></li>
+    <!-- <li><a routerLink="">Profile</a></li> -->
+
 
     <button class="logout-btn" (click)="login()" *ngIf="!showLoginBtn">
       <span>login</span>
     </button>
+    <div class="dropdown">
+      <button class="dropbtn" (click)="toggleDropdown()" *ngIf="isDropdownOpen1">Profile</button>
+      <div class="dropdown-content" [ngClass]="{'show': isDropdownOpen}">
+        <a href="#">My Profile</a>
+        <a href="#">Settings</a>
+        <a href="#">Dashboard</a>
+      </div>
+    </div>
     <button class="logout-btn" (click)="sinup()" *ngIf="!showLoginBtn">
       <span>Sinup</span>
     </button>

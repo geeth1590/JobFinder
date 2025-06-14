@@ -29,7 +29,7 @@ export class LoginComponent {
       }) as any;
 
       const data = response;
-console.log('Login response:', response);
+      console.log('Login response:', response);
       console.log('Login successful response:', response);
 
       if (data.roles && data.roles.includes('ROLE_JOB_SEEKER')) {
@@ -60,15 +60,8 @@ console.log('Login response:', response);
         }, 2000);
       }
 
-      else if(data.roles && data.roles.includes('ROLE_ADMIN')) {
-        // this.message = 'Access denied. You are not a job seeker.';
-
-        // Swal.fire({
-        //   icon: 'error',
-        //   title: 'Access Denied',
-        //   text: 'You are not authorized to access the job seeker dashboard.',
-        // });
-
+      else if (data.roles && data.roles.includes('ROLE_ADMIN')) {
+        
         this.message = 'Login successful!';
 
 
@@ -113,7 +106,7 @@ console.log('Login response:', response);
 
 
         setTimeout(() => {
-          this.router.navigate(['/AdminDashboard']);
+          this.router.navigate(['/compenyDashboard']);
         }, 2000);
 
       }

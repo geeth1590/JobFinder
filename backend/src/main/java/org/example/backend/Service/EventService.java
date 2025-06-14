@@ -16,6 +16,10 @@ public interface EventService {
 
     CommonResponse getAll();
 
+    CommonResponse getPendingEventsForAdmin();
+
+    CommonResponse getAcceptedEventsForUser();
+
     CommonResponse deletePlayerById(String id);
 
     CommonResponse getById(Long id);

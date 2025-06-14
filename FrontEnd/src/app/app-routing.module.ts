@@ -14,6 +14,9 @@ import { JobREquestComponent } from './components/Admin/job-request/job-request.
 import { EventTableComponent } from './components/Admin/event-table/event-table.component';
 import { EventDetailsComponent } from './components/User/event-details/event-details.component';
 import { ViweCompenyDetailsComponent } from './components/Admin/viwe-compeny-details/viwe-compeny-details.component';
+import { CompenyDashboardComponent } from './components/compeny/compeny-dashboard/compeny-dashboard.component';
+import { PostJobCompanyComponent } from './components/compeny/post-job-company/post-job-company.component';
+import { EventRequestComponent } from './components/Admin/event-request/event-request.component';
 
 
 const routes: Routes = [
@@ -33,7 +36,9 @@ const routes: Routes = [
   { path: 'eventTable' , component:EventTableComponent},
   { path: 'event-detail/:id' , component:EventDetailsComponent},
   { path: 'viwe_compeny_details' , component:ViweCompenyDetailsComponent},
-  // { path: 'newdashboard' , component:JobREquestComponent}
+  { path: 'compenyDashboard' , component:CompenyDashboardComponent},
+  { path: 'postJobCompany' , component:PostJobCompanyComponent},
+   { path: 'eventRequest' , component:EventRequestComponent}
 
     
 

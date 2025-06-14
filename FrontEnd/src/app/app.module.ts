@@ -26,6 +26,9 @@ import { JobREquestComponent } from './components/Admin/job-request/job-request.
 import { EventTableComponent } from './components/Admin/event-table/event-table.component';
 import { EventDetailsComponent } from './components/User/event-details/event-details.component';
 import { ViweCompenyDetailsComponent } from './components/Admin/viwe-compeny-details/viwe-compeny-details.component';
+import { CompenyDashboardComponent } from './components/compeny/compeny-dashboard/compeny-dashboard.component';
+import { PostJobCompanyComponent } from './components/compeny/post-job-company/post-job-company.component';
+import { EventRequestComponent } from './components/Admin/event-request/event-request.component';
 
 
 @NgModule({
@@ -49,6 +52,9 @@ import { ViweCompenyDetailsComponent } from './components/Admin/viwe-compeny-det
     EventTableComponent,
     EventDetailsComponent,
     ViweCompenyDetailsComponent,
+    CompenyDashboardComponent,
+    PostJobCompanyComponent,
+    EventRequestComponent,
 
 
   ],

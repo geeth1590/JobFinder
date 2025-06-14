@@ -21,6 +21,8 @@ public class EventController {
 
     @PostMapping("/saveEvent")
     public CommonResponse savePlayer (@RequestBody EventDTO eventDTO) {
+        System.out.println("role "+eventDTO.getRole());
+        System.out.println("uplodetBy"+eventDTO.getUplodetBy());
         return eventService.saveEvents(eventDTO);
 
     }
@@ -47,6 +49,20 @@ public class EventController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
         }
     }
+
+    @GetMapping("/admin/pending")
+    public ResponseEntity<CommonResponse> getPendingEventsForAdmin() {
+        try {
+            CommonResponse response = eventService.getPendingEventsForAdmin();
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            CommonResponse errorResponse = new CommonResponse();
+            errorResponse.setStatus(false);
+            errorResponse.setErrorMessages(Arrays.asList(e.getMessage()));
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
+        }
+    }
+
 
 
     @DeleteMapping("/deleteEvent/{id}")

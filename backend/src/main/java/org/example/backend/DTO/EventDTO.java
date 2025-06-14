@@ -21,4 +21,7 @@ public class EventDTO {
     private Double price;
     private String imageUrl;
     private String description;
+    private String uplodetBy;
+    private String role;
+
 }

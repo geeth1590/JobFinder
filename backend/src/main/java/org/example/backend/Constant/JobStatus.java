@@ -1,4 +1,4 @@
-package org.example.backend.Enum;
+package org.example.backend.Constant;
 
 public enum JobStatus {
 

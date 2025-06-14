@@ -5,6 +5,7 @@ import org.apache.logging.log4j.Logger;
 import org.example.backend.Constant.CommonMsg;
 import org.example.backend.Constant.CommonStatus;
 import org.example.backend.DTO.EventDTO;
+import org.example.backend.Constant.JobStatus;
 import org.example.backend.Model.Event;
 import org.example.backend.Repository.EventRepository;
 import org.example.backend.Service.EventService;
@@ -57,7 +58,17 @@ public class EventServiceImpl implements EventService {
         event.setPrice(eventDTO.getPrice());
         event.setTime(eventDTO.getTime());
         event.setTitle(eventDTO.getTitle());
-        event.setCommonStatus(CommonStatus.ACTIVE);
+        event.setRole(eventDTO.getRole());
+        event.setDescription(eventDTO.getDescription());
+        event.setUplodetBy(eventDTO.getUplodetBy());
+        if (eventDTO.getRole() != null && eventDTO.getRole().contains("[\"ROLE_ADMIN\"]")) {
+            event.setCommonStatus(CommonStatus.ACTIVE);
+            event.setJobStatus(JobStatus.ACCEPTED);
+        }else {
+            event.setCommonStatus(CommonStatus.INACTIVE);
+            event.setJobStatus(JobStatus.PENDING);
+        }
+
 
         return event;
     }
@@ -116,7 +127,12 @@ public class EventServiceImpl implements EventService {
         CommonResponse commonResponse=new CommonResponse();
         List<EventDTO> eventDTOS;
         try {
-            Predicate<Event> filterOnStatus = player -> player.getCommonStatus() != CommonStatus.DELETED;
+            Predicate<Event> filterOnStatus = event ->
+//                    event.getCommonStatus() != CommonStatus.DELETED &&
+//                            event.getCommonStatus() != CommonStatus.INACTIVE;
+                    event.getJobStatus() !=JobStatus.PENDING &&
+                    event.getJobStatus() !=JobStatus.REJECTED;
+
             eventDTOS = eventRepository.findAll()
                     .stream()
                     .filter(filterOnStatus)
@@ -131,6 +147,35 @@ public class EventServiceImpl implements EventService {
         return commonResponse;
     }
 
+    @Override
+    public CommonResponse getPendingEventsForAdmin() {
+        CommonResponse commonResponse=new CommonResponse();
+        List<EventDTO> eventDTOS;
+        try {
+            Predicate<Event> filterOnStatus = event ->
+//
+                    event.getJobStatus() !=JobStatus.ACCEPTED &&
+                            event.getJobStatus() !=JobStatus.REJECTED;
+
+            eventDTOS = eventRepository.findAll()
+                    .stream()
+                    .filter(filterOnStatus)
+                    .map(this::castEventIntoEventDTO)
+                    .collect(Collectors.toList());
+            commonResponse.setStatus(true);
+            commonResponse.setPayload(Collections.singletonList(eventDTOS));
+
+        } catch (Exception e) {
+            LOGGER.error("/**************** Exception in EventService -> getAll()" + e);
+        }
+        return commonResponse;
+    }
+
+    @Override
+    public CommonResponse getAcceptedEventsForUser() {
+        return null;
+    }
+
     private EventDTO castEventIntoEventDTO(Event event) {
         EventDTO eventDTO =new EventDTO();
 //        eventDTO.setLocation(event.getLocation());
@@ -142,6 +187,9 @@ public class EventServiceImpl implements EventService {
         eventDTO.setPrice(event.getPrice());
         eventDTO.setTime(event.getTime());
         eventDTO.setTitle(event.getTitle());
+        eventDTO.setDescription(event.getDescription());
+        eventDTO.setUplodetBy(event.getUplodetBy());
+        eventDTO.setRole(event.getRole());
 
         return eventDTO;
     }

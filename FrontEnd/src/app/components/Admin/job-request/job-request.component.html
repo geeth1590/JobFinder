@@ -1,34 +1,83 @@
-<div class="side-menu">
-    <div class="brand-name">
-        <h1>Brand</h1>
+<app-side-bar></app-side-bar>
+<div class="smart-table-container">
+  <div class="table-header">
+    <h2>Event Requests</h2>
+    <div class="search-box">
+      <i class="material-icons">search</i>
+      <input type="text" [(ngModel)]="searchTerm" placeholder="Search events...">
     </div>
-    <ul>
-        <li><i class="fas fa-home"></i>&nbsp; <span>Dashboard</span></li>
-        <li><i class="fas fa-desktop"></i>&nbsp; <span>Students</span></li>
-        <li><i class="fas fa-user"></i>&nbsp; <span>Teachers</span></li>
-        <li><i class="fas fa-university"></i>&nbsp; <span>Schools</span></li>
-        <li><i class="fas fa-money"></i>&nbsp; <span>Income</span></li>
-        <li><i class="fas fa-question-circle"></i>&nbsp; <span>Help</span></li>
-        <li><i class="fa fa-cog"></i>&nbsp; <span>Settings</span></li>
+  </div>
 
+  <div class="table-wrapper">
+    <table class="smart-table">
+      <thead>
+        <tr>
+          <th>Event</th>
+          <th>Schedule</th>
+          <th>Price</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let event of filteredEvents | slice:(currentPage-1)*pageSize:currentPage*pageSize"
+            class="fade-in">
+          <td class="event-cell">
+            <div class="event-info">
+              <div class="event-image">
+                <img [src]="event.imageUrl" [alt]="event.title">
+              </div>
+              <div class="event-details">
+                <h4>{{event.title}}</h4>
+                <p>{{event.location}}</p>
+              </div>
+            </div>
+          </td>
+          <td class="schedule-cell">
+            <div class="schedule-info">
+              <i class="material-icons">calendar_today</i>
+              <span>{{event.date | date:'MMM dd, yyyy'}}</span>
+              <span class="time">{{event.time}}</span>
+            </div>
+          </td>
+          <td class="price-cell">
+            <div class="price-tag">
+              <span>Rs. {{event.price}}</span>
+            </div>
+          </td>
+          <td class="status-cell">
+            <span [class]="'status-badge ' + event.status?.toLowerCase()">
+              {{event.status}}
+            </span>
+          </td>
+          <td class="actions-cell">
+            <button class="action-btn approve" 
+                    (click)="updateEventStatus(event.id, 'ACCEPTED')"
+                    [disabled]="event.status === 'ACCEPTED'">
+              <i class="material-icons">check_circle</i>
+              <span class="tooltip">Accept</span>
+            </button>
+            <button class="action-btn reject" 
+                    (click)="updateEventStatus(event.id, 'REJECTED')"
+                    [disabled]="event.status === 'REJECTED'">
+              <i class="material-icons">cancel</i>
+              <span class="tooltip">Reject</span>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 
-    </ul>
-</div>
-<div class="container">
-    <div class="header">
-        <div class="nav">
-            <div class="search">
-                <input type="text" placeholder="Search..">
-                <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
-            </div>
-            <div class="user">
-                <a href="#" class="btn">Add New</a>
-                <i class="fa fa-solid fa-bell"></i>
-                <div class="img-case">
-                    <img src="https://secure.gravatar.com/avatar/d09eaad01aea86c51b4f892b4f8abf6f?s=100&d=wavatar&r=g"
-                        alt="">
-                </div>
-            </div>
-        </div>
+  <div class="pagination">
+    <div class="page-controls">
+      <button (click)="prevPage()" [disabled]="currentPage === 1">
+        <i class="material-icons">chevron_left</i>
+      </button>
+      <span class="page-info">Page {{currentPage}} of {{totalPages}}</span>
+      <button (click)="nextPage()" [disabled]="currentPage === totalPages">
+        <i class="material-icons">chevron_right</i>
+      </button>
     </div>
+  </div>
 </div>

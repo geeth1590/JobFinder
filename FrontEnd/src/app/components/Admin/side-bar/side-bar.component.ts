@@ -3,27 +3,21 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-side-bar',
   templateUrl: './side-bar.component.html',
-  styleUrls: ['./side-bar.component.css']
+  styleUrls: ['./side-bar.component.scss']
 })
 export class SideBarComponent {
-  dropdownOpen1 = false;
-  dropdownOpen2 = false;
+  isCollapsed = false;
+  notificationCount = 3;
 
+  toggleSidebar() {
+    this.isCollapsed = !this.isCollapsed;
+  }
 
-// toggleDropdown(event: Event) {
-//   event.preventDefault(); // prevent page jump
-//   this.dropdownOpen = !this.dropdownOpen;
-// }
+  toggleNotifications() {
+    // Implement notifications logic
+  }
 
-// dropdownOpen = false;
-
-toggleDropdown1() {
-  this.dropdownOpen1 = !this.dropdownOpen1;
-}
-
-toggleDropdown2() {
-  this.dropdownOpen2 = !this.dropdownOpen2;
-}
-
-
+  toggleProfileMenu() {
+    // Implement profile menu logic
+  }
 }

@@ -1,0 +1,139 @@
+<div class="register-container">
+  <div class="register-card">
+    <div class="form-header">
+      <img src="assets/images/logonew.png" alt="Logo" class="logo">
+      <h2>Create Your Account</h2>
+      <p>Join our community and explore job opportunities</p>
+    </div>
+
+    <form (submit)="onRegister()" class="register-form" #registerForm="ngForm">
+      <div class="form-grid">
+        <div class="form-group">
+          <div class="input-wrapper">
+            <i class="material-icons">person</i>
+            <input 
+              type="text" 
+              id="username" 
+              [(ngModel)]="username" 
+              name="username" 
+              placeholder="Username"
+              required
+              #usernameInput="ngModel"
+            >
+          </div>
+          <span class="error-message" *ngIf="usernameInput.invalid && usernameInput.touched">
+            Username is required
+          </span>
+        </div>
+         <div class="form-group">
+          <div class="input-wrapper">
+            <i class="material-icons">person</i>
+            <input 
+              type="text" 
+              id="compenyName" 
+              [(ngModel)]="compenyName" 
+              name="compenyName" 
+              placeholder="compenyName"
+              required
+              #usernameInput="ngModel"
+            >
+          </div>
+          <span class="error-message" *ngIf="usernameInput.invalid && usernameInput.touched">
+            Company Name  is required
+          </span>
+        </div>
+
+         <div class="form-group">
+          <div class="input-wrapper">
+            <i class="material-icons">person</i>
+            <input 
+              type="number" 
+              id="phoneNumber" 
+              [(ngModel)]="phoneNumber" 
+              name="phoneNumber" 
+              placeholder="phoneNumber"
+              required
+              #usernameInput="ngModel"
+            >
+          </div>
+          <span class="error-message" *ngIf="usernameInput.invalid && usernameInput.touched">
+            Phone Nnumber  is required
+          </span>
+        </div>
+
+        <div class="form-group full-width">
+          <div class="input-wrapper">
+            <i class="material-icons">email</i>
+            <input 
+              type="email" 
+              id="email" 
+              [(ngModel)]="email" 
+              name="email" 
+              placeholder="Email address"
+              required
+              email
+              #emailInput="ngModel"
+            >
+          </div>
+          <span class="error-message" *ngIf="emailInput.invalid && emailInput.touched">
+            Please enter a valid email
+          </span>
+        </div>
+
+        <div class="form-group">
+          <div class="input-wrapper">
+            <i class="material-icons">lock</i>
+            <input 
+              [type]="showPassword ? 'text' : 'password'"
+              id="password" 
+              [(ngModel)]="password" 
+              name="password" 
+              placeholder="Password"
+              required
+              #passwordInput="ngModel"
+            >
+            <button type="button" class="toggle-password" (click)="showPassword = !showPassword">
+              <i class="material-icons">{{showPassword ? 'visibility_off' : 'visibility'}}</i>
+            </button>
+          </div>
+          <span class="error-message" *ngIf="passwordInput.invalid && passwordInput.touched">
+            Password is required
+          </span>
+        </div>
+
+        <div class="form-group">
+          <div class="input-wrapper">
+            <i class="material-icons">location_on</i>
+            <input 
+              type="text" 
+              id="address" 
+              [(ngModel)]="address" 
+              name="address" 
+              placeholder="Address"
+              required
+              #addressInput="ngModel"
+            >
+          </div>
+          <span class="error-message" *ngIf="addressInput.invalid && addressInput.touched">
+            Address is required
+          </span>
+        </div>
+
+        
+      </div>
+
+      <div class="action-buttons">
+        <button type="submit" class="submit-btn" [disabled]="registerForm.invalid">
+          <i class="material-icons">person_add</i>
+          Create Account
+        </button>
+        <!-- <button type="button" class="login-btn" (click)="onRegister()">
+          <i class="material-icons">login</i>
+          Sign In Instead
+        </button> -->
+      </div>
+
+      <div class="error-message" *ngIf="message">{{message}}</div>
+    </form>
+  </div>
+</div>

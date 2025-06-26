@@ -25,5 +25,17 @@ public interface EventService {
     CommonResponse getById(Long id);
 
 
+    void updateJobStatus(Long id, String statusStr);
 
+    CommonResponse getEventsForCompeny(String compenyId);
+
+    CommonResponse getDeatails( Long userId);
+
+    CommonResponse getAllDeatails();
+
+    CommonResponse getEventCount(Long user_id);
+
+    CommonResponse getJobRequestCount(Long userId);
+
+    CommonResponse getApproedCount(Long userId);
 }

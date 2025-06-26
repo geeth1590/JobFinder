@@ -95,7 +95,7 @@ export class PostJobCompanyComponent {
         Swal.fire({
           icon: 'success',
           title: 'Success',
-          text: 'Event posted successfully!',
+          text: 'Event posted For Admin ..successfully!',
           confirmButtonColor: '#3085d6'
         });
   

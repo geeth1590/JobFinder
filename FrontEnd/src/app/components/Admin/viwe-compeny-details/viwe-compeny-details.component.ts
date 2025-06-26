@@ -21,7 +21,7 @@ export class ViweCompenyDetailsComponent implements OnInit {
     this.loadCompeny();
   }
 
-loadCompeny(): void {
+loadCompeny(): void { 
   this.compenyService.getCompeny().subscribe({
     next: (response: any) => {
       if (
@@ -69,7 +69,7 @@ loadCompeny(): void {
 
      console.log("📝 Editing event:", company);
     this.selectedCompeny = { ...company };
-
+ 
       this.cdr.detectChanges(); 
   }
 

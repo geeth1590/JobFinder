@@ -1,0 +1,70 @@
+<app-navbar></app-navbar> 
+<div class="profile-container">
+  <div class="profile-header">
+    <div class="cover-photo">
+      <img [src]="userProfile.coverPhoto" alt="Cover Photo">
+      <button class="edit-cover">
+        <i class="material-icons">edit</i>
+      </button>
+    </div>
+    
+    <div class="profile-info">
+      <!-- <div class="profile-avatar">
+        <img [src]="userProfile.avatar" alt="Profile Picture">
+        <button class="edit-avatar">
+          <i class="material-icons">photo_camera</i>
+        </button>
+      </div> -->
+      
+      <div class="user-info">
+        <h1>{{JeboSeekerName}}</h1>
+        <!-- <p class="title">{{userProfile.title}}</p> -->
+        
+      </div>
+
+      <button class="edit-profile-btn">
+        <i class="material-icons">edit</i>
+        Edit Profile
+      </button>
+    </div>
+  </div>
+
+  <div class="profile-content">
+    <div class="profile-nav">
+      <button class="btn btn-primary" (click)="onOverviewClick()">Overview</button>
+      <button class="btn btn-primary" (click)="onJobReqBtn()">All Requested  Jobs</button>
+    </div>
+
+    <div class="profile-grid" *ngIf="showAboutUs">
+      <div class="profile-card about">
+        <h3>About</h3>
+        <p>{{userProfile.about}}</p>
+      </div>
+    </div>
+
+     <div class="profile-grid" *ngIf="!showAboutUs">
+      <div class="profile-card about">
+        <table class="table table-bordered table-striped">
+  <thead class="table-dark">
+    <tr>
+      <th>Image</th>
+      <th>Title</th>
+      <th>Date</th>
+      <th>Location</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let event of eventList">
+      <td>
+        <img [src]="event.image_url" alt="Event Image" width="100" />
+      </td>
+      <td>{{ event.title }}</td>
+      <td>{{ event.date | date: 'yyyy-MM-dd' }}</td>
+      <td>{{ event.location }}</td>
+    </tr>
+  </tbody>
+</table>
+      </div>
+    </div>
+  </div>
+</div>

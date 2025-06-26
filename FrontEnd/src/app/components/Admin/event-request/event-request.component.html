@@ -32,8 +32,16 @@
             <td>{{ event.uplodetBy }}</td>
             <td>{{ event.description }}</td>
             <td>
-              <button (click)="editEvent(event)" class="btn btn-primary btn-sm">Update</button>
-              <button (click)="deleteEvent(event.id)" class="btn btn-danger">Delete</button>
+              <div class="action-buttons">
+                <button class="btn-accept" (click)="updateEventStatus(event.id, 'ACCEPTED')" [disabled]="isProcessing">
+                  <i class="material-icons">check_circle</i>
+                  Accept
+                </button>
+                <button class="btn-reject" (click)="updateEventStatus(event.id, 'REJECTED')" [disabled]="isProcessing">
+                  <i class="material-icons">cancel</i>
+                  Reject
+                </button>
+              </div>
             </td>
 
           </ng-container>

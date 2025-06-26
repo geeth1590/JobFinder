@@ -1,23 +1,27 @@
-import { Component,OnInit  } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { EventService } from '../../../services/event.service';
 import { ChangeDetectorRef } from '@angular/core'; 
 
 @Component({
   selector: 'app-event-table',
   templateUrl: './event-table.component.html',
-  styleUrls: ['./event-table.component.css']
+  styleUrls: ['./event-table.component.scss']
 })
-export class EventTableComponent  implements OnInit {
+export class EventTableComponent implements OnInit {
+addNewEvent() {
+throw new Error('Method not implemented.');
+}
 
    eventList: any[] = [];
    selectedEvent: any = null;
+   searchTerm: string = '';
 
   constructor(private eventService: EventService,
               private cdr: ChangeDetectorRef
   ) {}
 
 
-
+ 
  ngOnInit(): void {
     this.loadEvents();
   }
@@ -85,5 +89,12 @@ export class EventTableComponent  implements OnInit {
         }
       });
     }
+  }
+
+  get filteredEvents() {
+    return this.eventList.filter(event => 
+      event.title.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+      event.location.toLowerCase().includes(this.searchTerm.toLowerCase())
+    );
   }
 }

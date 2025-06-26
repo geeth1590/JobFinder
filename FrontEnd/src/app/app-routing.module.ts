@@ -17,6 +17,9 @@ import { ViweCompenyDetailsComponent } from './components/Admin/viwe-compeny-det
 import { CompenyDashboardComponent } from './components/compeny/compeny-dashboard/compeny-dashboard.component';
 import { PostJobCompanyComponent } from './components/compeny/post-job-company/post-job-company.component';
 import { EventRequestComponent } from './components/Admin/event-request/event-request.component';
+import { JobSeekrProfileComponent } from './components/User/job-seekr-profile/job-seekr-profile.component';
+import { GenarateReportComponent } from './components/Admin/genarate-report/genarate-report.component';
+import { RegisterCompanyComponent } from './components/compeny/register-company/register-company.component';
 
 
 const routes: Routes = [
@@ -38,7 +41,10 @@ const routes: Routes = [
   { path: 'viwe_compeny_details' , component:ViweCompenyDetailsComponent},
   { path: 'compenyDashboard' , component:CompenyDashboardComponent},
   { path: 'postJobCompany' , component:PostJobCompanyComponent},
-   { path: 'eventRequest' , component:EventRequestComponent}
+  { path: 'eventRequest' , component:EventRequestComponent},
+  { path: 'jobSeekaProfile' , component:JobSeekrProfileComponent},
+  { path: 'genarateReport' , component:GenarateReportComponent},
+  { path: 'registerCompeny' , component:RegisterCompanyComponent}
 
     
 

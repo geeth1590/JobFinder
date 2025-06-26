@@ -11,6 +11,7 @@ import { AxiosResponse } from 'axios';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
+  showPassword = false;
 
   username = '';
   password = '';

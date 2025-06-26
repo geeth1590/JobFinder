@@ -14,6 +14,7 @@ import java.util.List;
 
 public class  CommonResponse {
     private List<Object> payload = null;
+    private String message;
     private List<String> errorMessages = new ArrayList<>();
     private boolean status = false;
 

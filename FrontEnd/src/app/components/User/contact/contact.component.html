@@ -1,4 +1,4 @@
-<app-navbar></app-navbar>
+<!-- <app-navbar></app-navbar>
 
 <div class="container1">
   
@@ -6,9 +6,9 @@
   <div class="contact-container">
       <h1 class="page-title">CONTACT US <span class="brand">JObFinder.lk</span></h1>
       <div class="divider"></div>
-    <!-- Flex wrapper for form and image -->
+    
     <div class="form-image-wrapper">
-      <!-- Left: Contact Form -->
+     
       <div class="contact-section">
         <h2 class="section-title">Get In Touch</h2>
 
@@ -32,7 +32,7 @@
         </form>
       </div>
 
-      <!-- Right: Image -->
+      
       <div class="form-side-image">
         <img src="https://images.websitebuilderexpert.com/wp-content/uploads/2023/02/13045442/Contact-Us-Page-Examples.jpg" alt="Contact Illustration">
       </div>
@@ -40,7 +40,7 @@
 
     <div class="divider"></div>
 
-    <!-- Contact Info Section -->
+    
     <div class="info-section">
       <div class="contact-info">
         <h3>Contact Information</h3>
@@ -50,6 +50,57 @@
       </div>
     </div>
 
+  </div>
+
+  <app-footer></app-footer>
+</div>
+ -->
+
+ <app-navbar></app-navbar>
+
+<div class="container1">
+  <div class="contact-container">
+    <h1 class="page-title">CONTACT US <span class="brand">JObFinder.lk</span></h1>
+    <div class="divider"></div>
+
+    <div class="form-image-wrapper">
+      <!-- Contact Form -->
+      <form (ngSubmit)="submitContactForm()" #contactForm="ngForm" class="contact-form">
+  <div class="form-group">
+    <label for="name">Your Name</label>
+    <input type="text" id="name" name="name" [(ngModel)]="contact.name" required>
+  </div>
+
+  <div class="form-group">
+    <label for="email">Email Address</label>
+    <input type="email" id="email" name="email" [(ngModel)]="contact.email" required>
+  </div>
+
+  <div class="form-group">
+    <label for="message">Message</label>
+    <textarea id="message" name="message" [(ngModel)]="contact.message" rows="5" required></textarea>
+  </div>
+
+  <button type="submit" class="submit-btn" [disabled]="contactForm.invalid">Send Message</button>
+</form>
+
+      <!-- Image -->
+      <div class="form-side-image">
+        <img src="assets/images/vector-contact-us-background.jpg" alt="Contact Illustration" />
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Contact Info -->
+    <div class="info-section">
+      <div class="contact-info">
+        <h3>Contact Information</h3>
+        <p><strong>Email:</strong> info&#64;JobFinder.lk</p>
+        <p><strong>Phone:</strong> 0773573870</p>
+        <p><strong>Address:</strong> 123, Colombo, Sri Lanka</p>
+      </div>
+    </div>
   </div>
 
   <app-footer></app-footer>

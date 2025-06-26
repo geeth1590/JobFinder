@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-register',
@@ -8,36 +10,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent {
-
-  // username = '';
-  // email = '';
-  // password = '';
-  // address ='';
-  // age: number = 0;
-  // message = '';
-  
-
-  // constructor(private authService: AuthService ,private  router: Router) {}
-
-  
-
-  // register() {
-  //   alert('Logging out...');
-  //   this.router.navigate(['/login']); // Redirect to login page
-  // }
-  
-  // async onRegister() {
-  //   try {
-  //     const or ={
-  //       username:'hello',
-  //       password:'helloe2'
-  //     }
-  //     const response = await this.authService.registerJobSeeker({ username: this.username, email: this.email, password: this.password , address: this.address, age:this.age});
-  //     this.message = 'Registration successful!';
-  //   } catch (error) {
-  //     this.message = 'Registration failed!';
-  //   }
-  // }
+  showPassword = false;
 
   username = '';
   email = '';
@@ -45,30 +18,49 @@ export class RegisterComponent {
   address = '';
   age: number = 0; 
 
+
   message = '';
+
 
   constructor(private authService: AuthService, private router: Router) {}
 
   async onRegister() {
-    try {
-      const payload = {
-        username: this.username,
-        email: this.email,
-        password: this.password,
-        address: this.address,
-        age: this.age
-      };
+  try {
+    const payload = {
+      username: this.username,
+      email: this.email,
+      password: this.password,
+      address: this.address,
+      age: this.age,
+      // base64Image: this.base64Image
+    };
 
-      const response = await this.authService.registerJobSeeker(payload);
-      this.message = 'Registration successful!';
-      // this.router.navigate(['/login']);
-    } catch (error) {
-      console.error('Registration error:', error);
-      this.message = 'Registration failed!';
-    }
-  }
+    const response = await this.authService.registerJobSeeker(payload);
+    console.log('Registration response:', response);
 
-  register() {
-    this.router.navigate(['/login']); // Redirect to login page
+    Swal.fire({
+      icon: 'success',
+      title: 'Success',
+      text: 'Registration successful!',
+
+    });
+    this.router.navigate(['/login']);
+
+    this.message = 'Registration successful!';
+    // this.router.navigate(['/login']);
+  } catch (error) {
+    console.error('Registration error:', error);
+
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+      text: 'Registration failed!',
+    });
+
+    this.message = 'Registration failed!';
   }
+}
+
+
+
 }

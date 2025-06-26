@@ -1,5 +1,6 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-navbar',
@@ -23,7 +24,7 @@ export class NavbarComponent implements OnInit {
     }
   }
   ngOnInit(): void {
-    throw new Error('Method not implemented.');
+    // throw new Error('Method not implemented.');
   }
   
   isMenuOpen = false;
@@ -31,22 +32,51 @@ export class NavbarComponent implements OnInit {
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
   }
+logout() {
+  Swal.fire({
+    title: 'Are you sure?',
+    text: 'You will be logged out.',
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonText: 'Yes, logout',
+    cancelButtonText: 'Cancel'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      this.router.navigate(['/login']);
+    }
+  });
+}
 
-  logout() {
-    alert('Are you shure...');
-    this.router.navigate(['/login']); // Redirect to login page
-  }
+sinup() {
+  Swal.fire({
+    title: 'Go to Signup?',
+    text: 'You will be redirected to the signup page.',
+    icon: 'question',
+    showCancelButton: true,
+    confirmButtonText: 'Yes, signup',
+    cancelButtonText: 'Cancel'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      this.router.navigate(['/register']);
+    }
+  });
+}
 
-  sinup(){
-    alert('Are you shure...');
-    this.router.navigate(['/register']);
-  }
-  login(){
-
-    alert('Are you shure...');
-    this.router.navigate(['/login']);
-  }
-
+login() {
+  Swal.fire({
+    title: 'Go to Login?',
+    text: 'You will be redirected to the login page.',
+    icon: 'info',
+    showCancelButton: true,
+    confirmButtonText: 'Yes, login',
+    cancelButtonText: 'Cancel'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      this.router.navigate(['/login']);
+    }
+  });
+}
+  
   toggleDropdown() {
     this.isDropdownOpen = !this.isDropdownOpen;
   }

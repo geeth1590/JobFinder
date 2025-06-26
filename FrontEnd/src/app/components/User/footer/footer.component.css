@@ -1,6 +1,6 @@
 .footer-container {
   /* background: linear-gradient(135deg, #3f51b5 0%, #2196F3 100%); */
-  background-color: #0b1437;
+  background: linear-gradient(to right, #0b1437, #3b82f6);
   color: #b0b0b0;
 ;
   padding: 2rem 0;
@@ -14,7 +14,7 @@
   justify-content: space-around;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0 20px; 
 }
 
 .footer-section {

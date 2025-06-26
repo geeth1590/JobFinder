@@ -1,111 +1,173 @@
- <app-side-bar></app-side-bar>
- <div class="container-fluid">
-    <div class="row">
-      
-    <div class="main-content">
-      <main role="main">
-        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-         <h1 class="h2">Dashboard</h1>
+<div class="dashboard-container">
+  <app-side-bar></app-side-bar>
+  
+  <div class="main-content">
+    <header class="dashboard-header">
+      <div class="header-left">
+        <h1>Welcome Back, Admin!</h1>
+        <p class="subtitle">Here's what's happening with your platform today.</p>
+      </div>
+      <div class="header-actions">
+        <div class="date-filter">
+          <i class="fas fa-calendar"></i>
+          <select>
+            <option>Last 7 Days</option>
+            <option>Last 30 Days</option>
+            <option>This Month</option>
+            <option>This Year</option>
+          </select>
+        </div>
+        <button class="action-btn" [routerLink]="'/genarateReport'">
+        <i class="fas fa-download"></i>
+         Download Report
+        </button>
+
+      </div>
+    </header>
+
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-icon storage">
+          <i class="fas fa-database"></i>
+        </div>
+        <div class="stat-info">
+          <span class="label">Storage Usage</span>
+          <h3>49/50 GB</h3>
+          <div class="progress">
+            <div class="progress-bar" style="width: 98%"></div>
+          </div>
+          <span class="status warning">Almost full</span>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon revenue">
+          <i class="fas fa-chart-line"></i>
+        </div>
+        <div class="stat-info">
+          <span class="label">Revenue</span>
+          <h3>$34,245</h3>
+          <span class="trend positive">
+            <i class="fas fa-arrow-up"></i>
+            12% vs last week
+          </span>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon issues">
+          <i class="fas fa-check-circle"></i>
+        </div>
+        <div class="stat-info">
+          <span class="label">Fixed Issues</span>
+          <h3>75</h3>
+          <span class="trend neutral">
+            <i class="fas fa-minus"></i>
+            Same as yesterday
+          </span>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon users">
+          <i class="fas fa-users"></i>
+        </div>
+        <div class="stat-info">
+          <span class="label">Active Users</span>
+          <h3>1,234</h3>
+          <span class="trend positive">
+            <i class="fas fa-arrow-up"></i>
+            18% this month
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="charts-grid">
+      <div class="chart-card">
+        <div class="card-header">
+          <h3>
+            <i class="fas fa-chart-bar"></i>
+            Daily Sales
+          </h3>
+          <div class="card-actions">
+            <button class="icon-btn refresh">
+              <i class="fas fa-sync-alt"></i>
+            </button>
+            <button class="icon-btn">
+              <i class="fas fa-ellipsis-v"></i>
+            </button>
+          </div>
+        </div>
+        <div class="card-body">
+          <canvas id="salesChart"></canvas>
+          <div class="chart-info">
+            <span class="info-badge positive">
+              <i class="fas fa-arrow-up"></i>
+              55% increase
+            </span>
+            <span class="update-time">Updated 4 minutes ago</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="chart-card">
+        <div class="card-header">
+          <h3>
+            <i class="fas fa-envelope"></i>
+            Email Subscriptions
+          </h3>
+          <div class="card-actions">
+            <button class="icon-btn">
+              <i class="fas fa-download"></i>
+            </button>
+          </div>
+        </div>
+        <div class="card-body">
+          <canvas id="subscriptionsChart"></canvas>
+          <div class="chart-info">
+            <span class="update-time">Last Campaign Performance</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tasks-section">
+      <div class="section-header">
+        <h3>Recent Tasks</h3>
+        <button class="add-task-btn">
+          <i class="fas fa-plus"></i>
+          Add New Task
+        </button>
+      </div>
+
+      <div class="tasks-grid">
+        <div class="task-card">
+          <div class="task-status completed"></div>
+          <div class="task-content">
+            <h4>Server Migration</h4>
+            <p>Migrate website to new hosting platform</p>
+            <div class="task-meta">
+              <span><i class="fas fa-calendar"></i> Due: Today</span>
+              <span><i class="fas fa-user"></i> John Doe</span>
+            </div>
+          </div>
+          <div class="task-priority high">High</div>
         </div>
 
-  
-        <!-- Cards Row 1 -->
-        <div class="row mb-4">
-          <!-- Space Usage -->
-          <div class="col-md-4">
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title">Use of Space</h5>
-                <p class="card-text">49/50 GB</p>
-                <a href="#" class="btn btn-primary btn-sm">Get More Space...</a>
-              </div>
+        <div class="task-card">
+          <div class="task-status in-progress"></div>
+          <div class="task-content">
+            <h4>Analytics Report</h4>
+            <p>Generate monthly analytics report</p>
+            <div class="task-meta">
+              <span><i class="fas fa-calendar"></i> Due: Tomorrow</span>
+              <span><i class="fas fa-user"></i> Jane Smith</span>
             </div>
           </div>
-  
-          <!-- Revenue -->
-          <div class="col-md-4">
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title">Last 24 Hours</h5>
-                <p class="card-text">Revenue $34,245</p>
-                <small class="text-muted">Tracked from Bithub</small>
-              </div>
-            </div>
-          </div>
-  
-          <!-- Fixed Issues -->
-          <div class="col-md-4">
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title">Last 24 Hours</h5>
-                <p class="card-text">Fixed Issues 75</p>
-                <small class="text-muted">Just Updated</small>
-              </div>
-            </div>
-          </div>
+          <div class="task-priority medium">Medium</div>
         </div>
-  
-        <!-- Cards Row 2 -->
-        <div class="row mb-4">
-          <!-- Daily Sales -->
-          <div class="col-md-6">
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title">Daily Sales</h5>
-                <p class="card-text">55% increase in today sales.</p>
-                <small class="text-muted">updated 4 minutes ago</small>
-              </div>
-            </div>
-          </div>
-  
-          <!-- Email Subscriptions -->
-          <div class="col-md-6">
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title">Email Subscriptions</h5>
-                <p class="card-text">Last Campaign Performance</p>
-                <small class="text-muted">campaign sent 2 days ago</small>
-              </div>
-            </div>
-          </div>
-        </div>
-  
-        <!-- Cards Row 3 -->
-        <div class="row mb-4">
-          <!-- Completed Tasks -->
-          <div class="col-md-6">
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title">Completed Tasks</h5>
-                <p class="card-text">Last Campaign Performance</p>
-                <small class="text-muted">campaign sent 2 days ago</small>
-              </div>
-            </div>
-          </div>
-  
-          <!-- Upgrade To PRO -->
-          <div class="col-md-6">
-            <div class="card bg-primary text-white">
-              <div class="card-body">
-                <h5 class="card-title">Upgrade To PRO</h5>
-                <ul class="list-unstyled">
-                  <li>TASKS</li>
-                  <li>BUGS</li>
-                  <li>WEBSITE</li>
-                  <li>SERVER</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-  
-        <!-- Employees Stats -->
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title">Employees Stats</h5>
-            <p class="card-text">New employees on 15th September, 2016</p>
-          </div>
-        </div>
-      </main>
+      </div>
     </div>
   </div>
+</div>

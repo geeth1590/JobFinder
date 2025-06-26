@@ -18,6 +18,9 @@ import { EventService } from 'src/app/services/event.service';
   styleUrls: ['./events.component.css']
 })
 export class EventsComponent implements OnInit {
+onFilterChange($event: string[]) {
+throw new Error('Method not implemented.');
+}
 
    eventList: any[] = [];
    searchQuery: string = '';

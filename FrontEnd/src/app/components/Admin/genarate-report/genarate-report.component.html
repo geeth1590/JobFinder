@@ -1,0 +1,95 @@
+
+<div class="report-container">
+  
+  <div class="report-header">
+    <h1>Report Generator</h1>
+    <p class="subtitle">Generate custom reports and analytics</p>
+  </div>
+
+  <div class="report-grid">
+    <!-- Report Type Selection -->
+    <div class="report-card">
+      <h2><i class="material-icons">description</i> Select Report Type</h2>
+      <div class="report-types">
+        <div class="type-option" [class.active]="selectedType === 'applications'"
+             (click)="selectReportType('applications')">
+          <i class="material-icons">work</i>
+          <span>Jobs Details</span>
+        </div>
+        <!-- <div class="type-option" [class.active]="selectedType === 'users'"
+             (click)="selectReportType('users')">
+          <i class="material-icons">people</i>
+          <span>User Analytics</span>
+        </div>
+        <div class="type-option" [class.active]="selectedType === 'events'"
+             (click)="selectReportType('events')">
+          <i class="material-icons">event</i>
+          <span>Event Statistics</span>
+        </div> -->
+      </div>
+    </div>
+
+    <!-- Date Range Selection -->
+    <!-- <div class="report-card">
+      <h2><i class="material-icons">date_range</i> Select Date Range</h2>
+      <div class="date-range">
+        <div class="date-input">
+          <label>Start Date</label>
+          <input type="date" [(ngModel)]="startDate">
+        </div>
+        <div class="date-input">
+          <label>End Date</label>
+          <input type="date" [(ngModel)]="endDate">
+        </div>
+      </div>
+      <div class="quick-dates">
+        <button (click)="setDateRange('today')">Today</button>
+        <button (click)="setDateRange('week')">This Week</button>
+        <button (click)="setDateRange('month')">This Month</button>
+      </div>
+    </div> -->
+
+    <!-- Report Preview -->
+    <!-- <div class="report-card preview">
+      <h2><i class="material-icons">analytics</i> Report Preview</h2>
+      <div class="preview-content" *ngIf="reportData">
+        <div class="stats-grid">
+          <div class="stat-box">
+            <span class="stat-value">{{reportData.totalApplications}}</span>
+            <span class="stat-label">Applications</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-value">{{reportData.activeUsers}}</span>
+            <span class="stat-label">Active Users</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-value">{{reportData.totalEvents}}</span>
+            <span class="stat-label">Events</span>
+          </div>
+        </div>
+        <canvas #reportChart></canvas>
+      </div>
+    </div> -->
+  </div>
+
+  <!-- Export Options -->
+  <div class="export-section">
+    <h2>Export Options</h2>
+    <div class="export-buttons">
+      <!-- <button class="export-btn pdf" (click)="exportReport('pdf')">
+        <i class="material-icons">picture_as_pdf</i>
+        Export as PDF
+      </button>
+      <button class="export-btn excel" (click)="exportReport('excel')">
+        <i class="material-icons">table_chart</i>
+        Export as Excel
+      </button> -->
+      <button class="export-btn print" (click)="generatePDF()">
+        <i class="material-icons">print</i>
+        Print Report
+      </button>
+
+      
+    </div>
+  </div>
+</div>

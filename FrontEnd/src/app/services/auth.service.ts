@@ -15,7 +15,13 @@ export class AuthService {
 
   // register job seeker using HttpClient (better for Angular)
   registerJobSeeker(user: any) {
+    console.log("Registering user:", user);
     return lastValueFrom(this.http.post(`${this.API_URL}/signup/job_seeker`, user));
+  }
+
+   registerCompany(user: any) {
+    console.log("Registering user:", user);
+    return lastValueFrom(this.http.post(`${this.API_URL}/signup/company`, user));
   }
 
 
@@ -23,6 +29,8 @@ export class AuthService {
   loginJobSeeker(user: any) {
     return lastValueFrom(this.http.post(`${this.API_URL}/signin`, user));
   }
+
+   
 
 
   // async resetPassword(data: any) {

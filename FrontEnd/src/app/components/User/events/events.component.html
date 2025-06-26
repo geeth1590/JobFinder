@@ -1,4 +1,4 @@
-<app-search-bar (searchChanged)="($event)"></app-search-bar>
+<app-search-bar></app-search-bar>
 
 <div class="events-container">
   <div class="events">
@@ -11,18 +11,10 @@
         <div class="event-meta">
           <p><i class="fa fa-calendar"></i> {{ event.date }} • {{ event.time }}</p>
           <p><i class="fa fa-map-marker"></i> {{ event.location }}</p>
-          <p ><i class="fa fa-dollar-sign"></i> {{ event.price }} </p>
+          <p ><i class="rs-icon">Rs</i> {{ event.price }} </p>
         </div>
 
-        <!-- <div class="event-meta">
-          <p><i class="highlight-price"></i> {{ event.price }} </p>
-          
-        </div> -->
-
-        <!-- <p class="event-price">
-          <span class="highlight-price">{{ event.price.split(' ')[0] }}</span>
-          {{ event.price.split(' ').slice(1).join(' ') }}
-        </p> -->
+      
 
        <a [routerLink]="['/event-detail', event.id]" class="buy-button" target="_self">Request</a>
       </div>

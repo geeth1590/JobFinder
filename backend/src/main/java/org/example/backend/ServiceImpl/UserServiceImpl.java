@@ -3,36 +3,43 @@ package org.example.backend.ServiceImpl;
 import org.apache.logging.log4j.Logger;
 import org.example.backend.Constant.CommonMsg;
 import org.example.backend.Constant.CommonStatus;
+import org.example.backend.Constant.JobStatus;
 import org.example.backend.DTO.EventDTO;
+import org.example.backend.DTO.JobRequestDTO;
 import org.example.backend.DTO.UserDTO;
 import org.example.backend.Model.Auth.User;
 import org.example.backend.Model.Event;
+import org.example.backend.Model.JobRequest;
 import org.example.backend.Repository.AuthRepos.UserRepository;
 import org.example.backend.Repository.EventRepository;
+import org.example.backend.Repository.JobRequestRepository;
 import org.example.backend.Service.EventService;
 import org.example.backend.Service.UserService;
 import org.example.backend.Utils.CommonResponse;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 import static org.apache.logging.log4j.LogManager.getLogger;
 
 @Service
 public class UserServiceImpl implements UserService {
 
-    private final Logger LOGGER =getLogger(UserService.class);
+    //    private static final Logger LOGGER = (Logger) LoggerFactory.getLogger(UserServiceImpl.class);
+    private final Logger LOGGER = getLogger(UserService.class);
     @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    JobRequestRepository jobRequestRepository;
 
 
     private List<String> validationUserDTO(UserDTO userDTO) {
         List<String> validation = new ArrayList<>();
-        if (userDTO==null){
+        if (userDTO == null) {
             validation.add(CommonMsg.CHECK_INPUT_DATA);
         }
         return validation;
@@ -40,24 +47,24 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public CommonResponse saveUser(UserDTO userDTO) {
-        CommonResponse commonResponse =new CommonResponse();
-
-        try {
-            List<String> validation = validationUserDTO(userDTO);
-            if (!CollectionUtils.isEmpty(validation)){
-                commonResponse.setErrorMessages(validation);
-                return commonResponse;
-            }
-            User user =castUserDTOIntoUser(userDTO);
-            userRepository.save(user);
-            commonResponse.setStatus(true);
-            commonResponse.setPayload(Collections.singletonList(userDTO));
-        }
-        catch (Exception e)
-        {
-            LOGGER.error("/**************** Exception in EventService -> saveEvent" + e);
-        }
-        return commonResponse;
+//        CommonResponse commonResponse =new CommonResponse();
+//
+//        try {
+//            List<String> validation = validationUserDTO(userDTO);
+//            if (!CollectionUtils.isEmpty(validation)){
+//                commonResponse.setErrorMessages(validation);
+//                return commonResponse;
+//            }
+//            User user =castUserDTOIntoUser(userDTO);
+//            userRepository.save(user);
+//            commonResponse.setStatus(true);
+//            commonResponse.setPayload(Collections.singletonList(userDTO));
+//        }
+//        catch (Exception e)
+//        {
+//            LOGGER.error("/**************** Exception in EventService -> saveEvent" + e);
+//        }
+        return null;
     }
 
     @Override
@@ -74,12 +81,12 @@ public class UserServiceImpl implements UserService {
             System.out.println("update event----------------------------------");
             System.out.println(userDTO.toString());
 //            Event userSave = this.eventRepository.getById(Long.valueOf(userDTO.getId()));
-              User userSave =this.userRepository.getById(Long.valueOf(userDTO.getId()));
+            User userSave = this.userRepository.getById(Long.valueOf(userDTO.getId()));
 //            userSave.setLocation(eventDTO.getLocation());
 //            event1.setCommonStatus(CommonStatus.ACTIVE);
-                userSave.setId(userDTO.getId());
-                userSave.setEmail(userDTO.getEmail()) ;
-                userSave.setRoles(userDTO.getRoles());
+            userSave.setId(userDTO.getId());
+            userSave.setEmail(userDTO.getEmail());
+            userSave.setRoles(userDTO.getRoles());
 
 
             userRepository.save(userSave);
@@ -87,7 +94,7 @@ public class UserServiceImpl implements UserService {
             commonResponse.setStatus(true);
             commonResponse.setPayload(Collections.singletonList(userDTO));
 
-        }catch (Exception e){
+        } catch (Exception e) {
             LOGGER.error("/**************** Exception in EventService -> UpdateEvent()" + e);
         }
         return commonResponse;
@@ -108,23 +115,81 @@ public class UserServiceImpl implements UserService {
         return null;
     }
 
+    @Override
+    public CommonResponse getEventByUser(Long id) {
+        CommonResponse response = new CommonResponse();
 
+        List<Object[]> eventList = userRepository.getEventByUser(id);
+        List<Map<String, Object>> mappedEvents = new ArrayList<>();
 
-    private UserDTO castUserIntoEvent(User user) {
-        UserDTO userDTO = new UserDTO();
-        user.setId(Long.valueOf(user.getId()));
-        user.setEmail(user.getEmail());
-        user.setRoles(user.getRoles());
+        for (Object[] row : eventList) {
+            Map<String, Object> eventMap = new HashMap<>();
+            eventMap.put("location", row[0]);
+            eventMap.put("title", row[1]);
+            eventMap.put("date", row[2]);
+            eventMap.put("image_url", row[3]);
+            mappedEvents.add(eventMap);
+        }
 
-        return userDTO;
+        response.setStatus(true);
+        response.setMessage("Request processed successfully.");
+//        response.setPayload(mappedEvents);
+        response.setPayload(Collections.singletonList(mappedEvents));  // Optional: echo back the request
+
+        return response;
     }
 
-    private User castUserDTOIntoUser(UserDTO userDTO) {
-        User user =new User();
-        user.setEmail(userDTO.getEmail());
-        user.setRoles(userDTO.getRoles());
-        user.setId(userDTO.getId());
+    @Override
+    public CommonResponse requestEvent(JobRequestDTO jobRequestDTO) {
+        CommonResponse response = new CommonResponse();
 
-        return user;
+        try {
+
+            if (jobRequestDTO == null ||
+                    jobRequestDTO.getUserId() == null ||
+                    jobRequestDTO.getEventId() == null) {
+
+                response.setStatus(false);
+                response.setErrorMessages(Collections.singletonList("User ID and Event ID are required."));
+                return response;
+            }
+
+
+            LOGGER.info("Received event request: {}", jobRequestDTO);
+
+
+            JobRequest jobRequest = castJobRequestDTOintoJobRequest(jobRequestDTO);
+            jobRequestRepository.save(jobRequest);
+            response.setStatus(true);
+            response.setMessage("Request processed successfully.");
+            response.setPayload(Collections.singletonList(jobRequestDTO));  // Optional: echo back the request
+
+        } catch (Exception e) {
+            LOGGER.error("Exception in requestEvent(): ", e);
+            response.setStatus(false);
+            response.setErrorMessages(Collections.singletonList("Failed to process request."));
+        }
+
+        return response;
+    }
+
+    private JobRequest castJobRequestDTOintoJobRequest(JobRequestDTO jobRequestDTO) {
+        JobRequest jobRequest = new JobRequest();
+
+        jobRequest.setUserId(jobRequestDTO.getUserId());
+        jobRequest.setEventId(jobRequestDTO.getEventId());
+
+        jobRequest.setJobStatus(JobStatus.PENDING);
+
+
+        return jobRequest;
+
     }
 }
+
+
+
+
+
+
+

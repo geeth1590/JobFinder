@@ -1,25 +1,44 @@
-.container1 {
-  /* background-image: url(https://www.searchenginejournal.com/wp-content/uploads/2022/09/asana-6310729269676-sej.png); */
-  padding: 20px;
-  padding-top: 0%;
-}
-.brand {
-  color: #ffffff;
-  font-weight: 700;
-}
 
+
+.container1 {
+  padding: 20px;
+  padding-top: 95px;
+  background: linear-gradient(to right, #f5f7fa, #c3cfe2);
+  min-height: 100vh;
+}
 
 .contact-container {
-  background-color: #ddd;
-  border-radius: 10px;
-  max-width: 1000px;
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  max-width: 1100px;
   margin: 0 auto;
   padding: 2rem;
-  font-family: 'Arial', sans-serif;
-  color: #333;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+  font-family: 'Segoe UI', sans-serif;
 }
 
-/* Flexbox for form and image */
+.page-title {
+  /* background-color: #0d5afd; */
+   background: linear-gradient(to right, #0b1437, #3b82f6);
+  padding: 95px ;
+  font-size: 2.2rem;
+  color: #fff;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.brand {
+  color: #ffe600;
+}
+
+.divider {
+  height: 3px;
+  background-color: #0d5afd;
+  margin: 2rem 0;
+  border-radius: 5px;
+}
+
 .form-image-wrapper {
   display: flex;
   justify-content: space-between;
@@ -30,6 +49,61 @@
 .contact-section {
   flex: 1;
   min-width: 300px;
+}
+
+.sub-text {
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+  color: #444;
+}
+
+.contact-form {
+  max-width: 500px;
+  animation: fadeIn 0.8s ease;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 0.8rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  background-color: #fff;
+  transition: border-color 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: #0d5afd;
+  outline: none;
+}
+
+.submit-btn {
+  background-color: #0d5afd;
+  color: white;
+  padding: 0.9rem 2rem;
+  border: none;
+  border-radius: 50px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.submit-btn:hover {
+  background-color: #093bba;
+  transform: scale(1.03);
 }
 
 .form-side-image {
@@ -43,135 +117,57 @@
 .form-side-image img {
   max-width: 100%;
   height: auto;
-  border-radius: 10px;
-}
-
-.breadcrumb {
-  margin-bottom: 1rem;
-  color:#b0b0b0;
-;
-}
-
-.breadcrumb a {
-  color: #0066cc;
-  text-decoration: none;
-}
-
-.breadcrumb a:hover {
-  text-decoration: underline;
-}
-
-.page-title {
-  border-radius: 10px;
-  background-color: #0d5afd;
-  padding: 40px 20px;
-  margin: 0px;
-  font-size: 2rem;
-  color: #000000;
-  margin-bottom: 0rem;
-}
-
-.divider {
-  height: 2px;
-  background-color: #be2c2c;
-  margin: 2rem 0;
-}
-
-.section-title {
-  font-size: 1.5rem;
-  margin-bottom: 1.5rem;
-  color: #222;
-}
-
-.contact-form {
-  max-width: 500px;
-}
-
-.form-group {
-  margin-bottom: 1.5rem;
-}
-
-.form-group label {
-  display: block;
-  margin-bottom: 0.5rem;
-  font-weight: 600;
-}
-
-.form-group input,
-.form-group textarea {
-  width: 100%;
-  padding: 0.75rem;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  font-size: 1rem;
-}
-
-.form-group textarea {
-  resize: vertical;
-}
-
-.submit-btn {
-  background-color: #0066cc;
-  color: white;
-  padding: 0.75rem 1.5rem;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 1rem;
-  transition: background-color 0.3s;
-}
-
-.submit-btn:hover {
-  background-color: #0055aa;
+  border-radius: 15px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
 }
 
 .info-section {
-  margin-top: 3rem;
   display: flex;
   flex-wrap: wrap;
   gap: 2rem;
+  margin-top: 3rem;
 }
 
-.contact-info,
-.social-info {
+.contact-info {
   flex: 1;
-  min-width: 250px;
   padding: 1.5rem;
-  background-color: #f9f9f9;
-  border-radius: 8px;
+  background-color: #ffffffd2;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
 }
 
-.contact-info h3,
-.social-info h3 {
+.contact-info h3 {
   margin-bottom: 1rem;
-  color: #222;
+  color: #0d5afd;
 }
 
-.social-link {
-  display: inline-block;
-  color: #0066cc;
-  text-decoration: none;
-  margin-top: 0.5rem;
-}
-
-.social-link:hover {
-  text-decoration: underline;
+.contact-info p {
+  margin: 0.5rem 0;
+  color: #333;
 }
 
 @media (max-width: 768px) {
-  .contact-container {
-    padding: 1rem;
-  }
-
-  .info-section {
-    flex-direction: column;
-  }
-
   .form-image-wrapper {
     flex-direction: column;
   }
 
   .contact-form {
     max-width: 100%;
+  }
+
+  .page-title {
+    font-size: 1.8rem;
+    padding: 20px 10px;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }

@@ -1,28 +1,84 @@
-<div class="container">
-  <div class="login-box">
-    <h2>Login</h2>
+<div class="login-container">
+  <div class="login-card">
+    <div class="form-header">
+      <img src="assets/images/logonew.png" alt="Logo" class="logo">
+      <h2>Welcome Back!</h2>
+      <p>Sign in to continue your job search journey</p>
+    </div>
 
-    <form (submit)="onLogin()">
-      <div class="input-group">
-        <label for="username">Username</label>
-        <input type="text" id="username" [(ngModel)]="username" name="username" required />
+    <form (submit)="onLogin()" #loginForm="ngForm" class="login-form"> 
+      <div class="form-group">
+        <div class="input-wrapper">
+          <i class="material-icons">person</i>
+          <input 
+            type="text" 
+            id="username" 
+            [(ngModel)]="username" 
+            name="username" 
+            placeholder="Enter your username"
+            required
+            #usernameInput="ngModel"
+          >
+        </div>
+        <span class="error-hint" *ngIf="usernameInput.invalid && usernameInput.touched">
+          Please enter your username
+        </span>
       </div>
 
-      <div class="input-group">
-        <label for="password">Password</label>
-        <input type="password" id="password" [(ngModel)]="password" name="password" required />
+      <div class="form-group">
+        <div class="input-wrapper">
+          <i class="material-icons">lock</i>
+          <input 
+            [type]="showPassword ? 'text' : 'password'"
+            id="password" 
+            [(ngModel)]="password" 
+            name="password" 
+            placeholder="Enter your password"
+            required
+            #passwordInput="ngModel"
+          >
+          <button type="button" class="toggle-password" (click)="showPassword = !showPassword">
+            <i class="material-icons">{{showPassword ? 'visibility_off' : 'visibility'}}</i>
+          </button>
+        </div>
+        <span class="error-hint" *ngIf="passwordInput.invalid && passwordInput.touched">
+          Please enter your password
+        </span>
       </div>
 
-      <div class="remember-me">
-        <input type="checkbox" id="remember" name="remember">
-        <label for="remember">Keep me signed in</label>
+      <div class="form-options">
+        <label class="remember-me">
+          <input type="checkbox" id="remember" name="remember">
+          <span class="checkmark"></span>
+          Keep me signed in
+        </label>
+        <a class="forgot-link" (click)="onForgotPassword()">Forgot Password?</a>
       </div>
 
-      <button type="submit" class="login-btn">SIGN IN</button>
+      <button type="submit" class="signin-btn" [disabled]="loginForm.invalid">
+        <i class="material-icons">login</i>
+        Sign In
+      </button>
+
+      <!-- <div class="divider">
+        <span>OR</span>
+      </div> -->
+
+      <!-- <div class="social-login">
+        <button type="button" class="google-btn">
+          <img src="assets/google-icon.png" alt="Google">
+          Continue with Google
+        </button>
+      </div> -->
+
+      <p class="signup-link">
+        Don't have an account? <a routerLink="/register">Sign Up</a>
+      </p>
+
+      <div class="error-message" *ngIf="message">
+        <i class="material-icons">error</i>
+        {{message}}
+      </div>
     </form>
-
-    <p class="forgot-password" (click)="onForgotPassword()">Forgot Password?</p>
-
-    <p class="error-message">{{message}}</p>
   </div>
 </div>

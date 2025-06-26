@@ -1,30 +1,73 @@
-<nav class="navbar">
+<!-- <nav class="navbar">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <div class="logo">JobFinder.lk</div>
   <ul class="nav-links" [class.active]="isMenuOpen">
-    <li><a routerLink="/dashboard">Home</a></li>
-    <li><a routerLink="/about">About</a></li>
-    <li><a routerLink="/contact">Contact</a></li>
-    <!-- <li><a routerLink="">Profile</a></li> -->
+    <li><a class="btn" routerLink="/dashboard">Home</a></li>
+    <li><a class="btn" routerLink="/about">About</a></li>
+    <li><a class="btn" routerLink="/contact">Contact</a></li>
+    
 
 
-    <button class="logout-btn" (click)="login()" *ngIf="!showLoginBtn">
-      <span>login</span>
-    </button>
+     <li> <a class="logout-btn" (click)="login()" *ngIf="!showLoginBtn">
+          <i class="fas fa-sign-in-alt"></i>login</a></li>
+    
     <div class="dropdown">
-      <button class="dropbtn" (click)="toggleDropdown()" *ngIf="isDropdownOpen1">Profile</button>
+      <li><a class="btn" (click)="toggleDropdown()" *ngIf="isDropdownOpen1">Profile</a></li>
       <div class="dropdown-content" [ngClass]="{'show': isDropdownOpen}">
-        <a href="#">My Profile</a>
-        <a href="#">Settings</a>
-        <a href="#">Dashboard</a>
+         <div class="dropdown-menu" [ngClass]="{ 'show': isDropdownOpen }">
+    <a href="#"><i class="fas fa-user"></i> My Profile</a>
+    <a href="#"><i class="fas fa-cog"></i> Settings</a>
+    <a href="#"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+  </div>
       </div>
     </div>
-    <button class="logout-btn" (click)="sinup()" *ngIf="!showLoginBtn">
-      <span>Sinup</span>
-    </button>
-    <button class="logout-btn" (click)="logout()" *ngIf="showLoginBtn">
-      <span>logout</span>
-    </button>
+     <li><a class="logout-btn" (click)="sinup()" *ngIf="!showLoginBtn">
+     <i class="fas fa-user-plus"></i> Signup</a></li>
+     
+    <li><a class="logout-btn" (click)="logout()" *ngIf="showLoginBtn">
+      <i class="fas fa-sign-out-alt"></i> Logout</a></li>
   </ul>
   <button class="menu-toggle" (click)="toggleMenu()">&#9776;</button>
+</nav> -->
+
+<nav class="navbar">
+  <div class="logo">JobFinder.lk</div>
+
+  <ul class="nav-links" [class.active]="isMenuOpen">
+    <li><a routerLink="/dashboard"><i class="fas fa-home"></i> Home</a></li>
+    <li><a routerLink="/about"><i class="fas fa-info-circle"></i> About</a></li>
+    <li><a routerLink="/contact"><i class="fas fa-envelope"></i> Contact</a></li>
+    <li *ngIf="showLoginBtn">
+      <a routerLink="/jobSeekaProfile"><i class="fas fa-user-circle"></i> Profile</a>
+    </li>
+
+    <li *ngIf="!showLoginBtn">
+      <a class="action-btn" (click)="login()"><i class="fas fa-sign-in-alt"></i> Login</a>
+    </li>
+
+    <li *ngIf="!showLoginBtn">
+      <a class="action-btn" (click)="sinup()"><i class="fas fa-user-plus"></i> Signup</a>
+    </li>
+
+    <li *ngIf="showLoginBtn">
+      <a class="action-btn" (click)="logout()"><i class="fas fa-sign-out-alt"></i> Logout</a>
+    </li>
+
+    <!-- <li *ngIf="showLoginBtn">
+      <a class="action-btn" (click)="logout()"><i class="fas fa-user-circle"></i> Profile</a>
+    </li> -->
+
+    <!-- <li *ngIf="isDropdownOpen1" class="dropdown">
+      <a (click)="toggleDropdown()"><i class="fas fa-user-circle"></i> Profile</a>
+      <div class="dropdown-content" [ngClass]="{ 'show': isDropdownOpen }">
+        <a href="jobSeekaProfile"><i class="fas fa-user"></i> My Profile</a>
+        <a href="#"><i class="fas fa-cog"></i> Settings</a>
+        <a href="#"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+      </div>
+    </li> -->
+  </ul>
+
+  <button class="menu-toggle" (click)="toggleMenu()">
+    <i class="fas fa-bars"></i>
+  </button>
 </nav>

@@ -23,5 +23,8 @@ public class EventDTO {
     private String description;
     private String uplodetBy;
     private String role;
+    private String jobStatus;
+
+
 
 }

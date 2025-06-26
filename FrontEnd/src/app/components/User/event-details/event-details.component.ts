@@ -1,7 +1,11 @@
+import { HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 import { EventService } from 'src/app/services/event.service';
+import { UserService } from 'src/app/services/user.service';
+import Swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-event-details',
@@ -11,17 +15,20 @@ import { EventService } from 'src/app/services/event.service';
 export class EventDetailsComponent implements OnInit {
   [x: string]: any;
   eventId!: number;
- event: any = null;
+  event: any = null;
+  isRequestSent: boolean = false;
+
 
 
   constructor(
     private route: ActivatedRoute,
-    private eventService: EventService
-  ) {}
+    private eventService: EventService,
+    private userService: UserService,
+  ) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
-       const idParam = params.get('id');
+      const idParam = params.get('id');
       this.eventId = idParam ? Number(idParam) : 0;
       if (this.eventId) {
         this.loadEventDetails(this.eventId);
@@ -31,9 +38,11 @@ export class EventDetailsComponent implements OnInit {
 
   loadEventDetails(id: number): void {
     this.eventService.getById(id).subscribe({
+
       next: (res) => {
         this.event = Array.isArray(res.payload[0]) ? res.payload[0][0] : null;
-        console.log(">>>>>>",this.event)
+        console.log("id .....", id)
+        console.log(">>>>>>", this.event)
       },
       error: (err) => {
         console.error('Error loading event details', err);
@@ -41,45 +50,63 @@ export class EventDetailsComponent implements OnInit {
     });
   }
 
-  requestJObs(){
-    const token = sessionStorage.getItem('token')
 
-    if(token){
-      console.log('Continue Request process')
-      
-    }else{
-      console.log('plz log !!!');
-      alert('please log first');
-    //   this.route.
-    // this.router.navigate(['/login']);
-      
-    }
 
+requestJobs() {
+  const token = sessionStorage.getItem('token');
+  const userId = sessionStorage.getItem('userId');
+  const userRole = sessionStorage.getItem('roles');
+
+  console.log('User ID:', userId);
+
+  if (!token || !userId) {
+    Swal.fire('Unauthorized', 'User not authenticated.', 'warning');
+    return;
   }
 
+  if (!this.eventId) {
+    Swal.fire('No Event Selected', 'Please select an event before requesting.', 'info');
+    return;
+  }
+
+  const requestBody = {
+    eventId: this.eventId,
+    userId: Number(userId),
+    userRole: String(userRole)
+  };
+
+  console.log("Requesting job with data:", requestBody);
+
+  const headers = new HttpHeaders({
+    'Authorization': `Bearer ${token}`,
+    'Content-Type': 'application/json'
+  });
+
+  Swal.fire({
+    title: 'Sending Request...',
+    didOpen: () => Swal.showLoading(),
+    allowOutsideClick: false
+  });
+
+  this.userService.requestJob(requestBody, headers).subscribe({
+    next: (res: any) => {
+      Swal.close();
+      Swal.fire('Success', 'Request sent successfully!', 'success');
+      this.isRequestSent = true;  // Hide the button
+    },
+    error: (err: any) => {
+      Swal.close();
+      Swal.fire(
+        'Error',
+        err?.error?.message || err.message || 'Unknown error',
+        'error'
+      );
+    }
+  });
+}
 
 
-  // event = {
-  //   title: 'Yugaswara (යුගාස්වර)',
-  //   date: 'Saturday, Jun 14',
-  //   time: '07:00 PM IST',
-  //   location: 'Museaus College',
-  //   organizer: 'V4 ENTERTAINMENT',
-  //   description: `
-  //     ශ්‍රී ලංකාවේ සම්භාවනීය කලාකරුවන් රැසකගේ සංගීතමය රසවින්දනයක්! 
-  //     සන්සුන් වූ සන්ධ්‍යා වාතයත් සමග ජීවිතය නැවත සටහන් කරගන්න...
-  //   `,
-  //   policies: [
-  //     'Only the E-Ticket with QR Code provided by MyTicketsLK will be accepted.',
-  //     'Tickets will not be redeemed for any forwarded or screenshots.',
-  //     'A valid NIC or Passport will be required.',
-  //     'Entry permitted for children (10 Yrs and above) only with a valid ticket.'
-  //   ],
-  //   ticketOptions: [
-  //     { label: '10000 LKR ODC - RESERVED', price: '10,000 LKR' },
-  //     { label: '7500 LKR ODC - RESERVED', price: '7,500 LKR' }
-  //   ],
-  //   imageUrl: 'https://yourcdn.com/yugaswara.jpg' // replace with actual image
-  // };
+
+
 }
 

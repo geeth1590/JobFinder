@@ -2,10 +2,10 @@
   <!-- Header Section -->
   <header class="dashboard-header">
     <div class="company-info">
-      <img src="assets/company-logo.png" alt="Company Logo" class="company-logo">
+      <!-- <img src="assets/company-logo.png" alt="Company Logo" class="company-logo"> -->
       <div class="company-details">
         <h1>{{companyName}}</h1>
-        <p>{{companyIndustry}}</p>
+        <!-- <p>{{companyIndustry}}</p> -->
       </div>
     </div>
     <div class="header-actions">
@@ -37,35 +37,56 @@
         <table>
           <thead>
             <tr>
-              <th>Candidate</th>
-              <th>Position</th>
-              <th>Applied Date</th>
-              <th>Status</th>
-              <th>Action</th>
+              <th scope="col">#</th>
+          <th scope="col">date</th>
+          <th scope="col">image_url</th>
+          <th scope="col">Location</th>
+          <th scope="col">price</th>
+          <th scope="col">time</th>
+          <th scope="col">title</th>
+          <th scope="col">description</th>
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let application of recentApplications">
-              <td class="candidate-info">
-                <img [src]="application.avatar || 'assets/default-avatar.png'" [alt]="application.name">
-                <span>{{application.name}}</span>
-              </td>
-              <td>{{application.position}}</td>
-              <td>{{application.appliedDate | date:'yyyy-MM-dd'}}</td>
-              <td><span class="status-badge" [ngClass]="application.status.toLowerCase()">{{application.status}}</span></td>
-              <td>
-                <button class="btn-icon" (click)="viewApplication(application.id)">
-                  <i class="material-icons">visibility</i>
-                </button>
-                <button class="btn-icon" (click)="editApplication(application.id)">
-                  <i class="material-icons">edit</i>
-                </button>
-              </td>
-            </tr>
+            <tr *ngFor="let event of paginatedEvents; let i = index">
+          <ng-container *ngIf="selectedEvent?.id !== event.id; else editRow">
+            <td>{{ i + 1 }}</td>
+            <td>{{ event.date }}</td>
+            <td><img [src]="event.imageUrl" alt="event" width="100" /></td>
+
+
+            <td>{{ event.location }}</td>
+            <td>{{ event.price }}</td>
+            <td>{{ event.time }}</td>
+            <td>{{ event.title }}</td>
+            <td>{{ event.description }}</td>
+            <td>
+              <!-- <button (click)="editEvent(event)" class="btn btn-primary btn-sm">Update</button>
+              <button (click)="deleteEvent(event.id)" class="btn btn-danger">Delete</button> -->
+            </td>
+
+          </ng-container>
+
+          <ng-template #editRow></ng-template>
           </tbody>
         </table>
       </div>
     </div>
+
+    <nav>
+    <ul class="pagination justify-content-center">
+      <li class="page-item" [class.disabled]="page === 1">
+        <a class="page-link" (click)="page = page - 1">Previous</a>
+      </li>
+      <li class="page-item disabled">
+        <span class="page-link">Page {{ page }}</span>
+      </li>
+      <li class="page-item" [class.disabled]="(page * pageSize) >= eventList.length">
+        <a class="page-link" (click)="page = page + 1">Next</a>
+      </li>
+    </ul>
+  </nav>
+
 
     <!-- Active Jobs -->
     <div class="content-card">
